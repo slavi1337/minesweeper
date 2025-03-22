@@ -5,26 +5,31 @@ import java.util.*;
 
 public class Minesweeper {
 
-    public static final Integer NUM_ROWS=10;
-    public static final Integer NUM_COLS=10;
-    public static final Integer TILE_SIZE=70;
-    Integer height=NUM_ROWS*TILE_SIZE;
-    Integer width=NUM_COLS*TILE_SIZE;
+    Integer NUM_ROWS;
+    Integer NUM_COLS;
+    Integer TILE_SIZE;
+    int height=700;
+    int width=700;
 
     JFrame frame = new JFrame();
     JLabel textLabel = new JLabel();
     JPanel textPanel = new JPanel();
     JPanel buttonPanel = new JPanel();
 
-    Tile[][] board=new Tile[NUM_ROWS][NUM_COLS];
-    int mineCount = 20;
+    Tile[][] board;
+    int mineCount;
     int tilesClicked=0;
 
     ArrayList<Tile> mineList;
     boolean gameOver = false;
     Random rand=new Random();
 
-    Minesweeper(){
+    Minesweeper(int rh,int ch,int mines){
+        NUM_ROWS=rh;
+        NUM_COLS=ch;
+        mineCount=mines;
+        TILE_SIZE=height/NUM_ROWS;
+        board=new Tile[NUM_ROWS][NUM_COLS];
         frame.setTitle("Minesweeper");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(width, height);
@@ -52,7 +57,7 @@ public class Minesweeper {
 
                 tile.setFocusable(false);
                 tile.setMargin(new Insets(0,0,0,0));
-                tile.setFont(new Font("Arial Unicode MS", Font.PLAIN, 40));
+                tile.setFont(new Font("Arial Unicode MS", Font.PLAIN, 30));
                 tile.addMouseListener(new MouseAdapter() {
                     @Override
                     public void mousePressed(MouseEvent e) {
